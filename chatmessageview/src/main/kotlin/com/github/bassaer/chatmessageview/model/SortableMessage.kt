@@ -1,5 +1,6 @@
 package com.github.bassaer.chatmessageview.model
 
+import com.github.bassaer.chatmessageview.util.DateFormatter
 import com.github.bassaer.chatmessageview.util.ITimeFormatter
 import java.util.*
 
@@ -25,5 +26,6 @@ abstract class SortableMessage {
 
     init {
         createdAt = Calendar.getInstance()
+        mDateFormatter = DateFormatter()
     }
 }

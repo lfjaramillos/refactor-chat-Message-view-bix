@@ -107,7 +107,6 @@ class Message : SortableMessage() {
     init {
         createdAt = Calendar.getInstance()
         mSendTimeFormatter = DefaultTimeFormatter()
-        mDateFormatter = DateFormatter()
         mSendTimeFormatter = DefaultTimeFormatter()
         type = Type.TEXT
     }
