@@ -25,7 +25,6 @@ class MessageView : ListView, View.OnFocusChangeListener {
      * All contents such as right message, left message, date label
      */
     private var chatList: MutableList<Any> = ArrayList()
-    private var pagedList: MutableList<Any> = ArrayList()
     /**
      * Only messages
      */
@@ -41,8 +40,6 @@ class MessageView : ListView, View.OnFocusChangeListener {
     private var refreshInterval: Long = 60000
 
     private var attribute: Attribute
-    var pageSize: Int = 15
-    private var currentPage: Int = 1
 
     interface OnKeyboardAppearListener {
         fun onKeyboardAppeared(hasChanged: Boolean)
@@ -79,7 +76,7 @@ class MessageView : ListView, View.OnFocusChangeListener {
      */
     fun init() {
         dividerHeight = 0
-        messageAdapter = MessageAdapter(context, 0, pagedList, attribute)
+        messageAdapter = MessageAdapter(context, 0, chatList, attribute)
 
         adapter = messageAdapter
 
@@ -91,16 +88,19 @@ class MessageView : ListView, View.OnFocusChangeListener {
                 handler.post { messageAdapter.notifyDataSetChanged() }
             }
         }, 1000, refreshInterval)
+    }
 
-        this.setOnLoadEarlierClickListener(object: Message.OnLoadEarlierMessagesClickListener {
-            override fun onLoadEarlierMessagesClick(totalItems: Int) {
-                if (hasMorePages) {
-                    currentPage += 1
-                    refresh()
-                }
-            }
 
-        })
+    fun setMessages(messages: List<SortableMessage>) {
+
+        chatList.clear()
+        messageList.clear()
+
+        messages.forEach {message ->
+            addMessage(message)
+        }
+
+        refresh()
     }
 
     /**
@@ -148,12 +148,10 @@ class MessageView : ListView, View.OnFocusChangeListener {
     private fun refresh() {
         sortMessages(messageList)
         chatList.clear()
-        pagedList.clear()
 
+        if(messageAdapter.shouldShowLoadEarlierMessages())
+            chatList.add(context.getString(R.string.load_earlier_messages))
         chatList.addAll(insertDateSeparator(messageList))
-        if(hasMorePages)
-            pagedList.add(context.getString(R.string.load_earlier_messages))
-        pagedList.addAll(chatList.takeLast(pageSize * currentPage))
         messageAdapter.notifyDataSetChanged()
     }
 
@@ -166,10 +164,6 @@ class MessageView : ListView, View.OnFocusChangeListener {
         messageList.clear()
         refresh()
     }
-
-    val hasMorePages : Boolean
-        @JvmName("hasMorePages")
-        get() = chatList.size > pageSize * currentPage
 
     private fun insertDateSeparator(list: List<SortableMessage>): List<Any> {
         val result = ArrayList<Any>()
@@ -271,8 +265,8 @@ class MessageView : ListView, View.OnFocusChangeListener {
         messageAdapter.setOnBubbleClickListener(listener)
     }
 
-    fun setOnLoadEarlierClickListener(listener: Message.OnLoadEarlierMessagesClickListener) {
-        messageAdapter.setOnLoadEarlierMessagesClickListener(listener)
+    fun setOnLoadEarlierMessagesListener(listener: Message.OnLoadEarlierMessagesListener) {
+        messageAdapter.setOnLoadEarlierMessagesListener(listener)
     }
 
     fun setOnBubbleLongClickListener(listener: Message.OnBubbleLongClickListener) {

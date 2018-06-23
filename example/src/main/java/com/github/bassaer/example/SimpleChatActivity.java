@@ -5,8 +5,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
 
 import com.github.bassaer.chatmessageview.model.ChatActivityMessage;
 import com.github.bassaer.chatmessageview.model.Message;
@@ -18,7 +16,12 @@ import java.util.ArrayList;
  * Simple chat UI
  * Created by nakayama on 2016/12/03.
  */
-public class SimpleChatActivity extends Activity {
+public class SimpleChatActivity extends Activity implements Message.OnLoadEarlierMessagesListener {
+
+    ArrayList<Message> messages = new ArrayList<>();
+    int currentPage = 1;
+    final int pageSize = 5;
+    MessageView messageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +42,6 @@ public class SimpleChatActivity extends Activity {
         final User me = new User(myId, myName, myIcon);
         final User you = new User(yourId, yourName, yourIcon);
 
-
-        ArrayList<Message> messages = new ArrayList<>();
-
         for (int i = 0; i < 10; i++) {
             Message message1 = new Message.Builder()
                     .setUser(me)
@@ -57,16 +57,36 @@ public class SimpleChatActivity extends Activity {
             messages.add(message2);
         }
 
-        MessageView messageView = findViewById(R.id.message_view);
-        messageView.setPageSize(5);
-        messageView.init(messages);
+        messageView = findViewById(R.id.message_view);
+        messageView.setOnLoadEarlierMessagesListener(this);
+        messageView.setMessages(messages.subList(messages.size() - (pageSize * currentPage), messages.size()));
 
 
         ChatActivityMessage activityMessage = new ChatActivityMessage.Builder().setMessage("Michael has left the chat").build();
         messageView.setChatActivityMessage(activityMessage);
+    }
 
-        Log.d("SimpleActivity", "isFocusable: " + messageView.isFocusable() +  " descendantFocusability: " + messageView.getDescendantFocusability());
+    public void onLoadEarlierMessagesClick(int totalItems) {
+        Log.d("SimpleActivity", "Loading earlier messages " + totalItems);
+        if (messages.size() > pageSize) {
+            currentPage += 1;
 
+            int lowerBound = messages.size() - (pageSize * currentPage);
+            if(lowerBound < 0)
+                lowerBound = 0;
+            messageView.setMessages(messages.subList(lowerBound, messages.size()));
+        }
+    }
 
+    @Override
+    public boolean shouldShowLoadEarlier() {
+        if(messages.size() > pageSize * currentPage) {
+            Log.d("SimpleChatActivity", "shouldShowLoadEarlier true");
+            return true;
+        }
+        else {
+            Log.d("SimpleChatActivity", "shouldShowLoadEarlier false");
+            return false;
+        }
     }
 }

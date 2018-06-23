@@ -247,8 +247,9 @@ class Message : SortableMessage() {
         fun onIconLongClick(message: Message)
     }
 
-    interface OnLoadEarlierMessagesClickListener {
+    interface OnLoadEarlierMessagesListener {
         fun onLoadEarlierMessagesClick(totalItems: Int)
+        fun shouldShowLoadEarlier() : Boolean
     }
 
     companion object {
