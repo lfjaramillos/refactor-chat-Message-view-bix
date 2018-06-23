@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 
 import com.github.bassaer.chatmessageview.model.ChatActivityMessage;
 import com.github.bassaer.chatmessageview.model.Message;
@@ -55,11 +58,15 @@ public class SimpleChatActivity extends Activity {
         }
 
         MessageView messageView = findViewById(R.id.message_view);
+        messageView.setPageSize(5);
         messageView.init(messages);
 
 
         ChatActivityMessage activityMessage = new ChatActivityMessage.Builder().setMessage("Michael has left the chat").build();
         messageView.setChatActivityMessage(activityMessage);
+
+        Log.d("SimpleActivity", "isFocusable: " + messageView.isFocusable() +  " descendantFocusability: " + messageView.getDescendantFocusability());
+
 
     }
 }

@@ -54,7 +54,7 @@ class Message : SortableMessage() {
      * Message status
      * You can use to know the message status such as fail, delivered, seen.. etc.
      */
-    var status: Int = 0
+    // var status: Int = 0
 
     /**
      * Message status type such as icon, text, or none.
@@ -245,6 +245,10 @@ class Message : SortableMessage() {
 
     interface OnIconLongClickListener {
         fun onIconLongClick(message: Message)
+    }
+
+    interface OnLoadEarlierMessagesClickListener {
+        fun onLoadEarlierMessagesClick(totalItems: Int)
     }
 
     companion object {

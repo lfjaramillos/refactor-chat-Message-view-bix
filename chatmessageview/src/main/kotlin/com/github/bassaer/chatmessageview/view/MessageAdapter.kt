@@ -11,10 +11,7 @@ import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.FrameLayout
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import com.github.bassaer.chatmessageview.R
 import com.github.bassaer.chatmessageview.model.ChatActivityMessage
 import com.github.bassaer.chatmessageview.model.Message
@@ -36,6 +33,7 @@ class MessageAdapter(context: Context, resource: Int, private val objects: List<
     private var bubbleClickListener: Message.OnBubbleClickListener? = null
     private var iconLongClickListener: Message.OnIconLongClickListener? = null
     private var bubbleLongClickListener: Message.OnBubbleLongClickListener? = null
+    private var loadEarlierMessagesClickListener: Message.OnLoadEarlierMessagesClickListener? = null
 
     private var usernameTextColor = ContextCompat.getColor(getContext(), R.color.blueGray500)
     private var sendTimeTextColor = ContextCompat.getColor(getContext(), R.color.blueGray500)
@@ -92,6 +90,10 @@ class MessageAdapter(context: Context, resource: Int, private val objects: List<
             dateViewHolder.dateLabelText?.text = item
             dateViewHolder.dateLabelText?.setTextColor(dateLabelColor)
             dateViewHolder.dateLabelText?.setTextSize(TypedValue.COMPLEX_UNIT_PX, attribute.dateSeparatorFontSize)
+
+            view?.setOnClickListener {view ->
+                loadEarlierMessagesClickListener?.onLoadEarlierMessagesClick(objects.size)
+            }
 
         } else if (item is ChatActivityMessage) {
 
@@ -315,6 +317,10 @@ class MessageAdapter(context: Context, resource: Int, private val objects: List<
     fun setRightBubbleColor(color: Int) {
         rightBubbleColor = color
         notifyDataSetChanged()
+    }
+
+    fun setOnLoadEarlierMessagesClickListener(onLoadEarlierMessagesClickListener: Message.OnLoadEarlierMessagesClickListener) {
+        loadEarlierMessagesClickListener = onLoadEarlierMessagesClickListener
     }
 
     fun setOnIconClickListener(onIconClickListener: Message.OnIconClickListener) {

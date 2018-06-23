@@ -6,7 +6,7 @@ import java.util.*
 
 class MessageDateComparator : Comparator<SortableMessage> {
     override fun compare(first: SortableMessage, second: SortableMessage): Int {
-        if (first.createdAt.before(second.createdAt)) {
+        if (first.sendTime.before(second.sendTime)) {
             return -1
         }
         return if (first.sendTime.after(second.sendTime)) {

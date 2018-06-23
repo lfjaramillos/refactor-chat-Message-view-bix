@@ -25,7 +25,7 @@ class ChatActivityMessage : SortableMessage() {
         }
 
         fun setCreatedAt(calendar: Calendar): Builder {
-            chatActivityMessage.createdAt = calendar
+            chatActivityMessage.sendTime = calendar
             return this
         }
 

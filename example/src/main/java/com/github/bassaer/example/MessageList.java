@@ -63,7 +63,7 @@ public class MessageList {
 
     private SaveMessage convertMessage(SortableMessage sortableMessage) {
         if (sortableMessage instanceof ChatActivityMessage) {
-            return new SaveMessage(sortableMessage.getCreatedAt());
+            return new SaveMessage(sortableMessage.getSendTime());
         } else if (sortableMessage instanceof Message) {
 
             Message message = (Message) sortableMessage;
@@ -71,9 +71,9 @@ public class MessageList {
             SaveMessage saveMessage = new SaveMessage(
                     Integer.valueOf(message.getUser().getId()),
                     message.getUser().getName(),
-                    message.getMessageText(),
-                    message.getCreatedAt(),
-                    message.isRightMessage());
+                    message.getText(),
+                    message.getSendTime(),
+                    message.isRight());
 
             saveMessage.setType(message.getType());
 

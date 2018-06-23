@@ -19,13 +19,20 @@ abstract class SortableMessage {
     /**
      * The time message that was created
      */
-    var createdAt = Calendar.getInstance()
+    var sendTime = Calendar.getInstance()
+
+    /**
+     * Message status
+     * You can use to know the message status such as fail, delivered, seen.. etc.
+     */
+
+    var status: Int = 0
 
     val dateSeparateText: String
-        get() = mDateFormatter!!.getFormattedTimeText(createdAt!!)
+        get() = mDateFormatter!!.getFormattedTimeText(sendTime!!)
 
     init {
-        createdAt = Calendar.getInstance()
+        sendTime = Calendar.getInstance()
         mDateFormatter = DateFormatter()
     }
 }
