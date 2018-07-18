@@ -1,12 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/message_text"
-    android:layout_width="wrap_content"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/message_text_shape_left"
-    android:gravity="left"
-    android:maxWidth="@dimen/width_normal"
-    android:padding="@dimen/spacing_micro"
-    android:text="@string/default_text_long"
-    android:textSize="@dimen/font_normal"/>
+    android:background="#4A90E2"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/spacing_micro"
+    android:paddingTop="@dimen/spacing_micro">
+
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/message_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxWidth="@dimen/width_normal"
+        android:paddingBottom="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="30dp"
+        android:paddingTop="5dp"
+        android:text="@string/default_text_long"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/font_normal" />
+
+    <TextView
+        android:id="@+id/timeLabelText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:paddingRight="15dp"
+        android:text="@string/default_time_text"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/font_small" />
+</LinearLayout>

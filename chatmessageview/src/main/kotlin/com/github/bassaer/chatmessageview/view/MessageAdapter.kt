@@ -40,7 +40,7 @@ class MessageAdapter(context: Context, resource: Int, private val objects: List<
     private var dateLabelColor = ContextCompat.getColor(getContext(), R.color.blueGray500)
     private var activityMessageTextColor = ContextCompat.getColor(getContext(), R.color.blueGray500)
     private var rightMessageTextColor = Color.WHITE
-    private var leftMessageTextColor = Color.BLACK
+    private var leftMessageTextColor = Color.WHITE
     private var leftBubbleColor: Int = 0
     private var rightBubbleColor: Int = 0
     private var statusColor = ContextCompat.getColor(getContext(), R.color.blueGray500)
@@ -130,7 +130,7 @@ class MessageAdapter(context: Context, resource: Int, private val objects: List<
                 getItem(position - 1).let {
                     if (it is Message && it.user.getId() == message.user.getId()) {
                         //If send same person, hide username and icon.
-                        message.iconVisibility = false
+                       // message.iconVisibility = false
                         message.usernameVisibility = false
                     }
                 }
@@ -172,8 +172,7 @@ class MessageAdapter(context: Context, resource: Int, private val objects: List<
             }
 
             // if false, icon is not shown.
-            if (!message.isIconHided) {
-                layoutInflater.inflate(if (message.isRight) R.layout.user_icon_right else R.layout.user_icon_left,
+            if (!message.isIconHided) { layoutInflater.inflate(if (message.isRight) R.layout.user_icon_right else R.layout.user_icon_left,
                         messageViewHolder.iconContainer).let {
                     messageViewHolder.icon = it.findViewById(R.id.user_icon)
                 }
