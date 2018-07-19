@@ -38,15 +38,7 @@ captures/
 
 # Intellij
 *.iml
-.idea/workspace.xml
-.idea/tasks.xml
-.idea/libraries
-.idea/vcs.xml
-.idea/misc.xml
-.idea/modules.xml
-.idea/markdown-navigator/
-.idea/markdown-navigator.xml
-.idea/codeStyleSettings.xml
+.idea/
 
 projectFilesBackup/
 
@@ -158,3 +150,16 @@ gradle-app.setting
 
 # # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
 # gradle/wrapper/gradle-wrapper.properties
+\.idea/\.name
+
+\.idea/caches/build_file_checksums\.ser
+
+\.idea/codeStyles/Project\.xml
+
+\.idea/compiler\.xml
+
+\.idea/copyright/profiles_settings\.xml
+
+\.idea/dictionaries/nakayama\.xml
+
+\.idea/runConfigurations\.xml

@@ -9,7 +9,8 @@
     <color name="cyan900">#006064</color>
     <color name="lightBlue500">#03A9F4</color>
 
-    <color name="green500">#4CAF50</color>
+    <color name="green500">#29dcc2</color>
+    <color name="backgroundleftmsn">#4A90E2</color>
 
 
 
@@ -23,6 +24,6 @@
     <color name="blueGray500">#607D8B</color>
 
     <!-- Bubble color -->
-    <color name="default_left_bubble_color">@color/button_material_light</color>
+    <color name="default_left_bubble_color">@color/backgroundleftmsn</color>
     <color name="default_right_bubble_color">@color/green500</color>
 </resources>

@@ -3,26 +3,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#FF22C4BF"
+
     android:gravity="end"
     android:orientation="vertical"
     android:paddingBottom="@dimen/spacing_micro"
     android:paddingTop="@dimen/spacing_micro">
 
-    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+     <TextView
         android:id="@+id/message_text"
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
+        android:background="@drawable/message_text_shape_right"
         android:gravity="start"
         android:maxWidth="@dimen/width_normal"
-        android:paddingBottom="10dp"
-        android:paddingLeft="30dp"
-        android:paddingRight="10dp"
-        android:paddingTop="5dp"
+        android:padding="@dimen/spacing_micro"
         android:text="@string/default_text_short"
         android:textColor="@android:color/white"
-        android:textSize="@dimen/font_normal" />
+        android:textSize="@dimen/font_normal"/>
 
     <TextView
         android:id="@+id/timeLabelText"
